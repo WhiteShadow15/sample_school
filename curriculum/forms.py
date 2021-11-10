@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment, Reply, Lesson
+from .models import Comment, Reply, Lesson 
 
 class LessonForm(forms.ModelForm):
     class Meta:
@@ -29,3 +29,4 @@ class ReplyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(ReplyForm, self).__init__(*args, **kwargs)
+

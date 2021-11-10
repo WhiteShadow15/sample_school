@@ -3,6 +3,7 @@ from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.contrib.auth.models import User
 import os
+from django.utils import timezone
 
 # Create your models here.
 class Standard(models.Model):
@@ -127,3 +128,4 @@ class Reply(models.Model):
 
     def __str__(self):
         return "reply to " + str(self.comment_name.comm_name)
+

@@ -6,6 +6,8 @@ from .models import Standard, Subject, Lesson, Comment, WorkingDays, TimeSlots
 from django.urls import reverse_lazy
 from .forms import CommentForm,ReplyForm, LessonForm
 from django.http import HttpResponseRedirect
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -113,6 +115,17 @@ class LessonCreateView(CreateView):
         fm.save()
         return HttpResponseRedirect(self.get_success_url())
 
+    def form_valid(self, form, *args, **kwargs):
+        self.object = self.get_object()
+        fm = form.save(commit=False)
+        fm.user = self.request.user
+        fm.Standard = self.object.standard
+        fm.subject = self.object.subject
+        fm.save()
+        return HttpResponseRedirect(self.get_success_url())
+                                                        
+
+
 class LessonUpdateView(UpdateView):
     fields = ('name','position','video','ppt','Notes')
     model= Lesson
@@ -129,3 +142,4 @@ class LessonDeleteView(DeleteView):
         standard = self.object.Standard
         subject = self.object.subject
         return reverse_lazy('curriculum:lesson_list',kwargs={'standard':standard.slug,'slug':subject.slug})
+

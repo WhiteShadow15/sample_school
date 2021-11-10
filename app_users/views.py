@@ -30,8 +30,8 @@ def user_login(request):
             else:
                 return HttpResponse("ACCOUNT IS DEACTIVATED")
         else:
-            return HttpResponse("Please use correct id and password")
-            # return HttpResponseRedirect(reverse('register'))
+            messages.warning(request,'Incorrect username or password !')
+            return HttpResponseRedirect(reverse('user_login'))
 
     else:
         return render(request, 'app_users/login.html')

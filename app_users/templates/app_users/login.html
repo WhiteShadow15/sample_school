@@ -30,6 +30,11 @@
 
 <section class="text-center mt-4">
               <h2 class="mb-5 font-weight-bold" style="color:#ff5722;">Login To Explore</h2>
+              {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
               <!-- class row for description-->
               <div class="row d-flex justify-content-center mb-4">
                 <!-- class column -->
